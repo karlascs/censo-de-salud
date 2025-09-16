@@ -1,0 +1,51 @@
+{
+  "name": "health-analysis-census",
+  "version": "1.0.0",
+  "description": "Sistema de Censo de Salud - Aplicación web para gestión y análisis de datos de pacientes",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=/healthAnalysis/",
+    "dev": "live-server --port=3000 --open=/healthAnalysis/ --watch=healthAnalysis/",
+    "build": "npm run minify-css && npm run minify-js",
+    "minify-css": "cleancss -o healthAnalysis/styles.min.css healthAnalysis/styles.css",
+    "minify-js": "uglifyjs healthAnalysis/script.js -o healthAnalysis/script.min.js",
+    "serve": "http-server healthAnalysis/ -p 8080 -o",
+    "test": "echo \"Ejecutando pruebas básicas...\" && node test/basic-tests.js"
+  },
+  "keywords": [
+    "health",
+    "census",
+    "patient-management",
+    "healthcare",
+    "data-analysis",
+    "javascript",
+    "html5",
+    "css3"
+  ],
+  "author": "Health Analysis Project",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "http-server": "^14.1.1",
+    "clean-css-cli": "^5.6.2",
+    "uglify-js": "^3.17.4",
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "bootstrap": "^5.3.2",
+    "font-awesome": "^4.7.0"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tu-usuario/health-analysis-census.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tu-usuario/health-analysis-census/issues"
+  },
+  "homepage": "https://github.com/tu-usuario/health-analysis-census#readme"
+}

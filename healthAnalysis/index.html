@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Censo de Salud</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23667eea'><path d='M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 9.5V12.5L21 15V13L19 12.5V11.5L21 9ZM3 13V15L9 12.5V9.5L3 7V9L5 11.5V12.5L3 13Z'/></svg>">
+    <!-- Bootstrap CSS -->
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sistema de Censo de Salud</h1>
+            <p>Análisis y gestión de datos de pacientes</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#" id="nav-registro" class="nav-link active">Registro de Pacientes</a></li>
+                <li><a href="#" id="nav-busqueda" class="nav-link">Búsqueda</a></li>
+                <li><a href="#" id="nav-informes" class="nav-link">Informes</a></li>
+                <li><a href="#" id="nav-estadisticas" class="nav-link">Estadísticas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Sección de Registro de Pacientes -->
+        <section id="registro-section" class="section active">
+            <h2>Registro de Nuevo Paciente</h2>
+            
+            <form id="patient-form" class="patient-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo *</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                        <span class="error-message" id="nombre-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edad">Edad *</label>
+                        <input type="number" id="edad" name="edad" min="0" max="120" required>
+                        <span class="error-message" id="edad-error"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Género *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="genero" value="masculino" required>
+                                Masculino
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="genero" value="femenino" required>
+                                Femenino
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="genero" value="otro" required>
+                                Otro
+                            </label>
+                        </div>
+                        <span class="error-message" id="genero-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+                        <input type="date" id="fecha-nacimiento" name="fechaNacimiento">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <textarea id="direccion" name="direccion" rows="2"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="condicion-salud">Condición de Salud Principal *</label>
+                    <select id="condicion-salud" name="condicionSalud" required>
+                        <option value="">Seleccione una condición</option>
+                        <option value="diabetes">Diabetes</option>
+                        <option value="hipertension">Hipertensión</option>
+                        <option value="asma">Asma</option>
+                        <option value="cardiopatia">Cardiopatía</option>
+                        <option value="artritis">Artritis</option>
+                        <option value="obesidad">Obesidad</option>
+                        <option value="depresion">Depresión</option>
+                        <option value="ansiedad">Ansiedad</option>
+                        <option value="cancer">Cáncer</option>
+                        <option value="saludable">Saludable (sin condiciones)</option>
+                        <option value="otra">Otra condición</option>
+                    </select>
+                    <span class="error-message" id="condicion-error"></span>
+                </div>
+
+                <div class="form-group" id="otra-condicion-group" style="display: none;">
+                    <label for="otra-condicion">Especifique la condición</label>
+                    <input type="text" id="otra-condicion" name="otraCondicion">
+                </div>
+
+                <div class="form-group">
+                    <label for="gravedad">Gravedad de la Condición</label>
+                    <select id="gravedad" name="gravedad">
+                        <option value="">Seleccione gravedad</option>
+                        <option value="leve">Leve</option>
+                        <option value="moderada">Moderada</option>
+                        <option value="grave">Grave</option>
+                        <option value="critica">Crítica</option>
+                        <option value="no-aplica">No aplica</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="medicamentos">Medicamentos Actuales</label>
+                    <textarea id="medicamentos" name="medicamentos" rows="2" placeholder="Liste los medicamentos que toma actualmente"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="peso">Peso (kg)</label>
+                        <input type="number" id="peso" name="peso" min="1" max="300" step="0.1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="altura">Altura (cm)</label>
+                        <input type="number" id="altura" name="altura" min="50" max="250">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Registrar Paciente</button>
+                    <button type="reset" class="btn btn-secondary">Limpiar Formulario</button>
+                </div>
+            </form>
+
+            <div id="success-message" class="success-message" style="display: none;">
+                <p>¡Paciente registrado exitosamente!</p>
+            </div>
+        </section>
+
+        <!-- Sección de Búsqueda -->
+        <section id="busqueda-section" class="section">
+            <h2>Búsqueda de Pacientes</h2>
+            
+            <div class="search-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="buscar-nombre">Buscar por Nombre</label>
+                        <input type="text" id="buscar-nombre" placeholder="Ingrese nombre del paciente">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="buscar-condicion">Filtrar por Condición</label>
+                        <select id="buscar-condicion">
+                            <option value="">Todas las condiciones</option>
+                            <option value="diabetes">Diabetes</option>
+                            <option value="hipertension">Hipertensión</option>
+                            <option value="asma">Asma</option>
+                            <option value="cardiopatia">Cardiopatía</option>
+                            <option value="artritis">Artritis</option>
+                            <option value="obesidad">Obesidad</option>
+                            <option value="depresion">Depresión</option>
+                            <option value="ansiedad">Ansiedad</option>
+                            <option value="cancer">Cáncer</option>
+                            <option value="saludable">Saludable</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="buscar-edad-min">Edad Mínima</label>
+                        <input type="number" id="buscar-edad-min" min="0" max="120">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="buscar-edad-max">Edad Máxima</label>
+                        <input type="number" id="buscar-edad-max" min="0" max="120">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button id="btn-buscar" class="btn btn-primary">Buscar</button>
+                    <button id="btn-limpiar-busqueda" class="btn btn-secondary">Limpiar</button>
+                </div>
+            </div>
+
+            <div id="resultados-busqueda" class="results-section">
+                <h3>Resultados de Búsqueda</h3>
+                <div id="lista-pacientes" class="patient-list"></div>
+            </div>
+        </section>
+
+        <!-- Sección de Informes -->
+        <section id="informes-section" class="section">
+            <h2>Informes de Pacientes</h2>
+            
+            <div class="report-controls">
+                <div class="form-group">
+                    <label for="tipo-informe">Tipo de Informe</label>
+                    <select id="tipo-informe">
+                        <option value="general">Informe General</option>
+                        <option value="por-condicion">Por Condición de Salud</option>
+                        <option value="por-edad">Por Grupo de Edad</option>
+                        <option value="por-genero">Por Género</option>
+                    </select>
+                </div>
+                
+                <button id="btn-generar-informe" class="btn btn-primary">Generar Informe</button>
+            </div>
+
+            <div id="contenido-informe" class="report-content"></div>
+        </section>
+
+        <!-- Sección de Estadísticas -->
+        <section id="estadisticas-section" class="section">
+            <h2>Estadísticas del Sistema</h2>
+            
+            <div id="estadisticas-generales" class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total de Pacientes</h3>
+                    <span id="total-pacientes" class="stat-number">0</span>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Edad Promedio</h3>
+                    <span id="edad-promedio" class="stat-number">0</span>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Condición Más Común</h3>
+                    <span id="condicion-comun" class="stat-text">N/A</span>
+                </div>
+            </div>
+
+            <!-- Gráficos con Chart.js -->
+            <div class="charts-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="chart-container">
+                            <h4>Distribución por Condición de Salud</h4>
+                            <canvas id="condicionesChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-container">
+                            <h4>Distribución por Género</h4>
+                            <canvas id="generoChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="chart-container">
+                            <h4>Distribución por Edad</h4>
+                            <canvas id="edadChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-container">
+                            <h4>IMC Promedio por Condición</h4>
+                            <canvas id="imcChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="estadisticas-detalladas" class="detailed-stats"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sistema de Censo de Salud - Laboratorio Práctico</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="../node_modules/chart.js/dist/chart.umd.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
